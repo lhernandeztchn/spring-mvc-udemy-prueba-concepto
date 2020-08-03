@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	layout:decorate="~{fragments/main}">
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/main :: main">
 <meta charset="UTF-8">
 <title></title>
 </head>
-<body>
-	<h1>Liverpool Campeón de Europa</h1>
+<body class="sb-nav-fixed">
+	<nav th:replace="fragments/header :: header"></nav>
+
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<nav th:replace="fragments/sb-sidenav-menu :: side-menu"></nav>
+		</div>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid">Plantilla</div>
+			</main>
+
+			<footer th:replace="fragments/footer :: footer"> </footer>
+		</div>
+	</div>
 </body>
 </html>
