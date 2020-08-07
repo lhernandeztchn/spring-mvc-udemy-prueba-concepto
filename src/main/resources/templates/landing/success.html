@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/main:: main"></head>
+<body>
+	<div id="layoutError">
+		<div id="layoutError_content">
+			<main>
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
+							<div class="text-center mt-4">
+								<h1 class="display-1">
+									<span class="badge badge-success"><i
+										class="fas fa-check-square"></i></span>
+								</h1>
+
+								<p>
+									<label th:text="${titulo}"></label>
+								</p>
+								<p class="lead" th:text="${mensaje}"></p>
+								<a th:href="${link}" class="btn btn-primary"> <i
+									class="fas fa-check"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<div id="layoutError_footer">
+			<footer th:replace="fragments/footer :: footer"></footer>
+		</div>
+</body>
+</html>

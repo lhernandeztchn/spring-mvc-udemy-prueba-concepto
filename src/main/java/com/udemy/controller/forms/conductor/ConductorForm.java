@@ -17,7 +17,6 @@ public class ConductorForm {
 	@Size(max = 13)
 	private String dni;
 
-
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past

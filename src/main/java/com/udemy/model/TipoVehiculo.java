@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,8 +24,10 @@ public class TipoVehiculo implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
+	@NotEmpty
+	@Size(min = 2, max = 100)
 	@Column(name = "tipo_vehiculo", length = 100, nullable = false)
 	private String tipoVehiculo;
 
@@ -37,16 +41,16 @@ public class TipoVehiculo implements Serializable {
 	public TipoVehiculo() {
 	}
 
-	public TipoVehiculo(Integer id) {
+	public TipoVehiculo(int id) {
 		super();
 		this.id = id;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

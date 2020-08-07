@@ -25,7 +25,7 @@ public class Modelo implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
 	@ManyToOne
 	@JoinColumn(name = "marca_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_marca_id_marca"))
@@ -41,11 +41,11 @@ public class Modelo implements Serializable {
 	@OneToMany(mappedBy = "modelo", fetch = FetchType.LAZY)
 	private List<Vehiculo> vehiculos;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

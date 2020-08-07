@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema = "public", name = "marcas")
@@ -21,8 +23,10 @@ public class Marca implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
+	@NotEmpty
+	@Size(min = 2, max = 100)
 	@Column(name = "marca", length = 100, nullable = false)
 	private String marca;
 
@@ -36,16 +40,16 @@ public class Marca implements Serializable {
 	public Marca() {
 	}
 
-	public Marca(Integer id) {
+	public Marca(int id) {
 		super();
 		this.id = id;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
