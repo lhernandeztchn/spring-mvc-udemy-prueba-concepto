@@ -29,10 +29,14 @@ public class Modelo implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "marca_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_marca_id_marca"))
+	@JsonIgnore
 	private Marca marca;
 
 	@Column(name = "modelo", length = 50, nullable = false)
 	private String modelo;
+
+	@Column(name = "codigo", length = 8, nullable = true)
+	private String codigo;
 
 	@Column(name = "estado", nullable = false)
 	private boolean estado;
@@ -55,6 +59,14 @@ public class Modelo implements Serializable {
 
 	public void setMarca(Marca marca) {
 		this.marca = marca;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getModelo() {

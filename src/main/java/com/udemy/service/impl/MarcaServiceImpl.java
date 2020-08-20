@@ -1,11 +1,13 @@
 package com.udemy.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.udemy.model.Marca;
+import com.udemy.model.Modelo;
 import com.udemy.repo.IMarcaRepository;
 import com.udemy.service.IMarcaService;
 import com.udemy.service.common.ServiceCommon;
@@ -38,7 +40,7 @@ public class MarcaServiceImpl extends ServiceCommon<Marca> implements IMarcaServ
 
 			base.setMarca(t.getMarca());
 			base.setEstado(t.isEstado());
-			base.setModelos(t.getModelos());
+			base.setModelos(setMarcaToModelo(t.getModelos(), base));
 			repo.save(base);
 			return 1;
 		} catch (Exception e) {
@@ -82,5 +84,15 @@ public class MarcaServiceImpl extends ServiceCommon<Marca> implements IMarcaServ
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	private List<Modelo> setMarcaToModelo(List<Modelo> modelos, Marca marca) {
+		ArrayList<Modelo> modelosMarca = new ArrayList<>();
+		modelos.forEach(modelo -> {
+			modelo.setMarca(marca);
+			modelosMarca.add(modelo);
+		});
+
+		return modelosMarca;
 	}
 }

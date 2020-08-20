@@ -98,5 +98,4 @@ public class Viajes implements Serializable {
 	public void setFechaRetorno(LocalDateTime fechaRetorno) {
 		this.fechaRetorno = fechaRetorno;
 	}
-
 }

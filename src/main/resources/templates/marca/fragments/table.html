@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+            var tr = [];
+            
+			$("#add").click(function() {
+				var model = $("#modelo").val();
+				var code = $("#codigo").val();
+
+				var modelo = {
+					id : 0,
+					modelo : model,
+					codigo : code,
+					estado : true
+				};
+				$("#modelo").val("");
+				$("#codigo").val("");
+				addTable(modelo);
+			});
+
+	        function addTable(modelo) {
+	            tr.push("<tr>");
+	            tr.push("<td>" + modelo.codigo + "</td>");
+	            tr.push("<td>" + modelo.modelo + "</td>");
+	            tr.push(
+	              "<td align='center'><button class='btn btn-danger delete' id=" +
+	              modelo.id +
+	                "codigo=" +
+	                modelo.codigo +
+	                "><i class='fa fa-trash'></i></button></td>"
+	            );
+	            tr.push("</tr>");
+	            $("#rows").html("");
+	            $("#rows").append($(tr.join("")));
+	          }
+		});
+	</script>
+</body>
+</html>
