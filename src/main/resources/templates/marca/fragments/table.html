@@ -1,41 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-
 	<script type="text/javascript" th:fragment="javascript">
-		$(document).ready(function() {
-            var tr = [];
-            
-			$("#add").click(function() {
-				var model = $("#modelo").val();
-				var code = $("#codigo").val();
+		$(document)
+				.ready(
+						function() {
+							var tr = [];
+
+							$("#add").click(function() {
+								var model = $("#modelo").val();
+								var code = $("#codigo").val();
+
+								var modelo = {
+									id : 0,
+									modelo : model,
+									codigo : code,
+									estado : true,
+								};
+								$("#modelo").val("");
+								$("#codigo").val("");
+								addTable(modelo);
+							});
+
+							function addTable(modelo) {
+								tr.push("<tr id=row_" + modelo.id + ">");
+								tr.push("<td>" + modelo.codigo + "</td>");
+								tr.push("<td>" + modelo.modelo + "</td>");
+								tr
+										.push("<td><button class='btn btn-danger delete' id='" + modelo.id +"'><i class='fa fa-trash'></i></button></td>");
+
+								tr.push("</tr>");
+								$("#rows").html("");
+								$("#rows").append($(tr.join("")));
+							}
+						});
+
+		$(document).delegate(".delete", "click", function() {
+			var id = $(this).attr("id");
+			console.log(id);
+			$("#row_" + id).remove();
+		});
+
+		$(document).delegate("#saveModel", "click", function() {
+			var modelos = [];
+			$("#rows > tr").each(function(index, tr) {
+				var currentRow = $(this);
+				var code = currentRow.find("td:eq(0)").text();
+				var model = currentRow.find("td:eq(1)").text();
 
 				var modelo = {
 					id : 0,
 					modelo : model,
 					codigo : code,
-					estado : true
+					estado : true,
 				};
-				$("#modelo").val("");
-				$("#codigo").val("");
-				addTable(modelo);
+				
+				modelos.push(modelo);
 			});
-
-	        function addTable(modelo) {
-	            tr.push("<tr>");
-	            tr.push("<td>" + modelo.codigo + "</td>");
-	            tr.push("<td>" + modelo.modelo + "</td>");
-	            tr.push(
-	              "<td align='center'><button class='btn btn-danger delete' id=" +
-	              modelo.id +
-	                "codigo=" +
-	                modelo.codigo +
-	                "><i class='fa fa-trash'></i></button></td>"
-	            );
-	            tr.push("</tr>");
-	            $("#rows").html("");
-	            $("#rows").append($(tr.join("")));
-	          }
+			console.log(modelos);
 		});
 	</script>
 </body>
