@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.udemy.controller.response.ErrorRestRresponse;
+import com.udemy.controller.response.ErrorRestResponse;
 import com.udemy.model.Marca;
 import com.udemy.model.Modelo;
 import com.udemy.service.IMarcaService;
@@ -30,8 +30,8 @@ public class MarcaRestController {
 		try {
 			return new ResponseEntity<List<Modelo>>(service.listarPorId(id).getModelos(), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<ErrorRestRresponse>(
-					new ErrorRestRresponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
+			return new ResponseEntity<ErrorRestResponse>(
+					new ErrorRestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -41,8 +41,8 @@ public class MarcaRestController {
 		try {
 			return new ResponseEntity<Marca>(service.listarPorId(id), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<ErrorRestRresponse>(
-					new ErrorRestRresponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
+			return new ResponseEntity<ErrorRestResponse>(
+					new ErrorRestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -52,8 +52,8 @@ public class MarcaRestController {
 		try {
 			return new ResponseEntity<Integer>(service.modificar(marca), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<ErrorRestRresponse>(
-					new ErrorRestRresponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
+			return new ResponseEntity<ErrorRestResponse>(
+					new ErrorRestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

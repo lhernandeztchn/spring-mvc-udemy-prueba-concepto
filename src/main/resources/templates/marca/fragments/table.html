@@ -1,64 +1,129 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <body>
-	<script type="text/javascript" th:fragment="javascript">
-		$(document)
-				.ready(
-						function() {
-							var tr = [];
+    <script type="text/javascript" th:fragment="javascript">
+        var idMarca = $(location).attr("href").split("/").pop();
+        var urlGet = "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/marca/modelos/get/" + idMarca;
+        var urlGetMarca = "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/marca/get/" + idMarca;
+        var urlGetIdModeloActual = "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/modelo/getCurrentId";
+        var urlDelete = "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/modelo/eliminar/";
+        var urlSaveMarca = "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/marca/save";
+        var tr = [];
 
-							$("#add").click(function() {
-								var model = $("#modelo").val();
-								var code = $("#codigo").val();
+        $(document).ready(function () {
 
-								var modelo = {
-									id : 0,
-									modelo : model,
-									codigo : code,
-									estado : true,
-								};
-								$("#modelo").val("");
-								$("#codigo").val("");
-								addTable(modelo);
-							});
+            var idModeloCurrent = 0;
+            var jsonModelos = [];
+            var table = $("#table").DataTable();
 
-							function addTable(modelo) {
-								tr.push("<tr id=row_" + modelo.id + ">");
-								tr.push("<td>" + modelo.codigo + "</td>");
-								tr.push("<td>" + modelo.modelo + "</td>");
-								tr
-										.push("<td><button class='btn btn-danger delete' id='" + modelo.id +"'><i class='fa fa-trash'></i></button></td>");
+            $("#adds")
+                .click(
+                    function () {
 
-								tr.push("</tr>");
-								$("#rows").html("");
-								$("#rows").append($(tr.join("")));
-							}
-						});
+                        var model = $("#modelo").val();
+                        var code = $("#codigo").val();
 
-		$(document).delegate(".delete", "click", function() {
+                        if (model == "" || code == "") {
+                            Swal
+                                .fire({
+                                    type: "error",
+                                    title: "Error",
+                                    text: "El Código y el Modelo Son Requeridos."
+                                });
+                        } else {
+                            $.ajax({
+                                url: "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/modelo/get/codeModel/" + code,
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data) {
+                                        Swal.fire({
+                                            type: "error",
+                                            title: "Error",
+                                            text: "El Código ya esta siendo Utilizado por otro Modelo",
+                                        });
+                                    } else {
+                                        table.row.add([code, model, "<td align='center'><button class='btn btn-danger delete' id='" + modelo.id + "'><i class='fa fa-trash'></i></button></td>"]).draw();
+                                        $("#modelo").val("");
+                                        $("#codigo").val("");
+                                    }
+                                },
+                                error: function (err) {
+
+                                    console.log(err);
+
+                                    Swal.fire({
+                                        type: "error",
+                                        title: "Error en Modelos Disponibles",
+                                        text:
+                                            "Hubo un Error al momento de Guardar la Información de los Modelos"
+                                    });
+                                }
+                            });
+                        }
+                    });
+
+
+        });
+
+        $(document).delegate(".delete", "click", function () {
+//             var table = $("#modelo").DataTable();
+//             var jsonModelos = [];
 			var id = $(this).attr("id");
-			console.log(id);
-			$("#row_" + id).remove();
-		});
 
-		$(document).delegate("#saveModel", "click", function() {
-			var modelos = [];
-			$("#rows > tr").each(function(index, tr) {
-				var currentRow = $(this);
-				var code = currentRow.find("td:eq(0)").text();
-				var model = currentRow.find("td:eq(1)").text();
+        	var table = $("#table").DataTable();
+        	table
+            .row( $(this).parents('tr') )
+            .remove()
+            .draw();
+        	
+        	console.log(id);
 
-				var modelo = {
-					id : 0,
-					modelo : model,
-					codigo : code,
-					estado : true,
-				};
-				
-				modelos.push(modelo);
-			});
-			console.log(modelos);
-		});
-	</script>
+        });
+
+        $(document).delegate("#saveModel", "click", function (event) {
+            event.preventDefault();
+            var modelosAdded = [];
+            var jsonMarca = {};
+
+            if (modelosAdded.length > 0) {
+
+                var marca = $("#marca").text();
+
+                jsonMarca = {
+                    id: idMarca,
+                    marca: marca,
+                    estado: true,
+                    modelos: modelosAdded
+                };
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: urlSaveMarca,
+                    data: JSON.stringify(jsonMarca),
+                    cache: false,
+                    success: function (result) {
+                        console.log(result);
+                        Swal.fire({
+                            type: "success",
+                            title: "Modelos Disponibles",
+                            text: "Los Modelos Fueron Actualizados de Forma Exitosa",
+                            confirmButtonText: "Aceptar"
+                        });
+                    },
+                    error: function (err) {
+                        Swal.fire({
+                            type: "error",
+                            title: "Error en Modelos Disponibles",
+                            text:
+                                "Hubo un Error al momento de Guardar la Información de los Modelos",
+                        });
+                    }
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>

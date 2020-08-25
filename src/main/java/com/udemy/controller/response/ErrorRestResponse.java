@@ -2,19 +2,16 @@ package com.udemy.controller.response;
 
 import java.io.Serializable;
 
-public class ErrorRestRresponse implements Serializable {
+public class ErrorRestResponse implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int code;
 	private String error;
 	
-	public ErrorRestRresponse() {
+	public ErrorRestResponse() {
 	}
 
-	public ErrorRestRresponse(int code, String error) {
+	public ErrorRestResponse(int code, String error) {
 		super();
 		this.code = code;
 		this.error = error;
