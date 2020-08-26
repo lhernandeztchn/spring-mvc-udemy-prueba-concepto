@@ -26,11 +26,9 @@ public class ModeloViewController extends ControllerView {
 
 	@GetMapping(path = "/form/{idMarca}")
 	public String listarModelPorIdMarca(Model model, @PathVariable("idMarca") Integer id) {
-		model.addAttribute("titulo", "Modelos Disponibles");
-		model.addAttribute("marcaOb", service.listarPorId(id));
+		model.addAttribute("titulo", "Modelos Disponibles / "+service.listarPorId(id).getMarca());
 		return "marca/modelo-form";
 	}
-	
 	
 	@PostMapping(path =  "/form/{idMarca}" )
 	public String salvarMarca(Model model, @Valid @ModelAttribute("marcaForm") Marca marca,
@@ -54,40 +52,4 @@ public class ModeloViewController extends ControllerView {
 			return Landing(model, "Error Guardando la Marca", e.getMessage(), "listar", LandingPages.ERROR);
 		}
 	}
-	
-	
-
-//	@PostMapping("/procesarModelo")
-//	public String salvarModelo(Model model, @ModelAttribute("marcaOb") Marca marca,
-//			@Valid @ModelAttribute("modeloForm") Modelo modelForm, BindingResult bindingResult) {
-//		try {
-//
-//			List<Modelo> modelos = new ArrayList<Modelo>();
-//
-//			if (bindingResult.hasErrors()) {
-//				return "marca/modelo-form";
-//			} else {
-//
-//				if (marca.getModelos() == null) {
-//					modelos.add(modelForm);
-//					marca.setModelos(modelos);
-//				} else {
-//					modelos = marca.getModelos();
-//					for (Modelo modelo : modelos) {
-//						if (modelForm.getId() == modelo.getId())
-//							modelos.remove(modelo);
-//						modelos.add(modelForm);
-//					}
-//					marca.setModelos(modelos);
-//				}
-//
-//				service.modificar(marca);
-//				return Landing(model, "Actualización de los Modelos Disponibles",
-//						"La Inforación de los Modelos se realizo de forma Exitosa", "listar", LandingPages.SUCCESS);
-//			}
-//		} catch (Exception e) {
-//			return Landing(model, "Error Guardando la Marca", e.getMessage(), "listar", LandingPages.ERROR);
-//		}
-//	}
-
 }
