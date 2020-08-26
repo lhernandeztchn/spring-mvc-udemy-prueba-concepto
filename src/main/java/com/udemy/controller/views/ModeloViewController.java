@@ -26,7 +26,10 @@ public class ModeloViewController extends ControllerView {
 
 	@GetMapping(path = "/form/{idMarca}")
 	public String listarModelPorIdMarca(Model model, @PathVariable("idMarca") Integer id) {
-		model.addAttribute("titulo", "Modelos Disponibles / "+service.listarPorId(id).getMarca());
+		Marca marca =service.listarPorId(id);
+		model.addAttribute("titulo", "Modelos Disponibles / "+marca.getMarca());
+		model.addAttribute("marcaNombre", marca.getMarca());
+
 		return "marca/modelo-form";
 	}
 	

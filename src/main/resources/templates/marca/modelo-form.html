@@ -70,7 +70,7 @@
 							<div class="row align-items-center d-flex justify-content-center">
 								<div class="table-responsive mt-4">
 									<table id="table" align="center"
-										class="table table-striped table-bordered w-75">
+										class="table table-striped table-bordered w-50">
 										<thead class="bg-dark text-white">
 											<tr>
 												<td>Código</td>
@@ -80,6 +80,7 @@
 										</thead>
 										<tbody id="rows">
 										</tbody>
+
 									</table>
 								</div>
 							</div>
@@ -97,6 +98,14 @@
 							</div>
 
 						</div>
+
+						<div class="card-footer text-muted">
+							<h3>
+								Marca: <span class="badge badge-info" id="marca"
+									th:text="${marcaNombre}"></span>
+							</h3>
+						</div>
+
 					</div>
 				</div>
 			</main>
