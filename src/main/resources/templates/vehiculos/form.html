@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/main :: main">
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body class="sb-nav-fixed">
+	<nav th:replace="fragments/header :: header"></nav>
+
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<nav th:replace="fragments/sb-sidenav-menu :: side-menu"></nav>
+		</div>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid">
+					<div class="card mt-4">
+
+						<div class="card-header">
+							<label th:text="${titulo}"></label>
+						</div>
+
+						<div class="card-body">
+							<form action="#" class="form-horizontal" role="form"
+								th:action="@{/marca/procesarMarca}" th:object="${vehiculoForm}"
+								method="post">
+
+								<div th:if="${#fields.hasErrors('*')}"
+									class="alert alert-danger">
+									<p th:text="#{marca.hasErrors}"></p>
+								</div>
+
+								<div>
+									<input name="id" type="hidden" th:value="${vehiculoForm.id}" />
+								</div>
+
+								<div
+									class="form-group row align-items-center d-flex justify-content-center">
+									<label for="marca" class="col-lg-2 control-label">Marca</label>
+									<div class="col-lg-5">
+										<input type="text" class="form-control" id="vehiculo"
+											th:field="*{vehiculo}" placeholder="Marca" /> <span
+											class="help-block" th:if="${#fields.hasErrors('vehiculo')}">
+											<ul>
+												<li class="text-danger"
+													th:each="err : ${#fields.errors('vehiculo')}" th:text="${err}" />
+											</ul>
+										</span>
+									</div>
+								</div>
+
+								<div
+									class="form-group row align-items-center d-flex justify-content-center">
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<button type="submit" class="btn btn-primary">
+											<i class="fas fa-save"></i>
+										</button>
+										<a th:href="@{/vehiculo/listar}" class="btn btn-danger"> <i
+											class="fas fa-undo"></i>
+										</a>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<footer th:replace="fragments/footer :: footer"> </footer>
+		</div>
+	</div>
+</body>
+</html>

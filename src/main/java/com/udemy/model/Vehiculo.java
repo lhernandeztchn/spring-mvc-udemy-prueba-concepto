@@ -30,17 +30,22 @@ public class Vehiculo implements Serializable {
 	@JoinColumn(name = "tipo_vehiculo_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_vehiculo_id_tipo_vehiculo"))
 	private TipoVehiculo tipoVehiculo;
 
-	@Column(name = "placa", length = 10, nullable = false)
-	private String placa;
-
-	@Column(name = "vin", length = 50, nullable = false)
-	private String VIN;
-
 	@Column(name = "transmision", length = 3, nullable = false)
 	private String transmision;
 
+	@Column(name = "url_imagen", length = 1000, nullable = false)
+	private String urlImagen;
+
 	@Column(name = "estado", nullable = false)
 	private boolean estado;
+
+	@Column(name = "precio", nullable = false)
+	private double precio;
+	
+	@Column(name = "precio", nullable = false)
+	private int cantidad;
+	
+	
 
 	public Vehiculo() {
 	}
@@ -74,24 +79,20 @@ public class Vehiculo implements Serializable {
 		this.tipoVehiculo = tipoVehiculo;
 	}
 
-	public String getPlaca() {
-		return placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-
-	public String getVIN() {
-		return VIN;
-	}
-
-	public void setVIN(String vIN) {
-		VIN = vIN;
-	}
-
 	public String getTransmision() {
 		return transmision;
+	}
+
+	public void setTransmision(String transmision) {
+		this.transmision = transmision;
+	}
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
 	}
 
 	public boolean isEstado() {
@@ -100,9 +101,5 @@ public class Vehiculo implements Serializable {
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
-	}
-
-	public void setTransmision(String transmision) {
-		this.transmision = transmision;
 	}
 }

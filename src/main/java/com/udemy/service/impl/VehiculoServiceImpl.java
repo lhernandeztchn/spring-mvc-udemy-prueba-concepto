@@ -36,13 +36,11 @@ public class VehiculoServiceImpl extends ServiceCommon<Vehiculo> implements IVeh
 			if (base == null)
 				return 0;
 
-			base.setVIN(t.getVIN());
-			base.setPlaca(t.getPlaca());
 			base.setModelo(t.getModelo());
 			base.setTipoVehiculo(t.getTipoVehiculo());
 			base.setTransmision(t.getTransmision());
 			base.setEstado(t.isEstado());
-
+			base.setUrlImagen(t.getUrlImagen());
 			repo.save(base);
 			return 1;
 		} catch (Exception e) {
