@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+		var urlGetMarcas = "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/marca/get";
+
+		$(document).ready(function() {
+			$.getJSON(urlGetMarcas, function(json) {
+				for (var i = 0; i < json.length; i++) {
+
+				}
+			});
+		});
+	</script>
+</body>
+</html>

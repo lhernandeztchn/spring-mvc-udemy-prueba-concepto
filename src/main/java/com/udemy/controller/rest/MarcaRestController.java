@@ -36,6 +36,17 @@ public class MarcaRestController {
 		}
 	}
 
+	@GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> get() throws Exception {
+		try {
+			return new ResponseEntity<List<Marca>>(service.listar(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<ErrorRestResponse>(
+					new ErrorRestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	@GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getMarca(@PathVariable("id") Integer id) throws Exception {
 		try {
@@ -57,4 +68,4 @@ public class MarcaRestController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-}
+}	

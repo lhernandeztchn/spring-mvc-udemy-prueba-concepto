@@ -38,15 +38,7 @@ public class Vehiculo implements Serializable {
 
 	@Column(name = "estado", nullable = false)
 	private boolean estado;
-
-	@Column(name = "precio", nullable = false)
-	private double precio;
 	
-	@Column(name = "precio", nullable = false)
-	private int cantidad;
-	
-	
-
 	public Vehiculo() {
 	}
 
