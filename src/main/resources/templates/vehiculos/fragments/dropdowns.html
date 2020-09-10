@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
-	<script type="text/javascript" th:fragment="javascript">
-		var urlGetMarcas = "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/marca/get";
+  <body>
+    <script type="text/javascript" th:fragment="javascript">
+      var reader = new FileReader();
+      reader.onload = function (r_event) {
+        document
+          .getElementById("prev")
+          .setAttribute("src", r_event.target.result);
+      };
 
-		$(document).ready(function() {
-			$.getJSON(urlGetMarcas, function(json) {
-				for (var i = 0; i < json.length; i++) {
+      document
+        .getElementsByName("file")[0]
+        .addEventListener("change", function (event) {
+          reader.readAsDataURL(this.files[0]);
+        });
 
-				}
-			});
-		});
-	</script>
-</body>
+      $(document).ready(function () {
+        var idMarca = 0;
+
+        $("#modelo").remoteChained({
+          parents: "#marca",
+          url:
+            "http://localhost:8080/spring-mvc-udemy-prueba-concepto/api/modelo/getModelosByMarca",
+        });
+      });
+    </script>
+  </body>
 </html>

@@ -27,7 +27,6 @@
 										<td>ID</td>
 										<td>Marca</td>
 										<td>Modelo</td>
-										<td>Tipo de Vehículo</td>
 										<td>Vehículo</td>
 										<td></td>
 										<td></td>
@@ -38,7 +37,6 @@
 											<td th:text="${item.id}"></td>
 											<td th:text="${item.modelo.marca.marca}"></td>
 											<td th:text="${item.modelo.modelo}"></td>
-											<td th:text="${item.tipoVehiculo.tipoVehiculo}"></td>
 											<td align="center"><a
 												th:href="@{/marca/form/{id}(id=${item.id})}"
 												class="btn btn-primary"> <i class="fas fa-edit"></i>
